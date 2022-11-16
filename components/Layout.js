@@ -2,10 +2,6 @@ import styled, { createGlobalStyle } from "styled-components";
 import Header from "./Header";
 
 const GlobalStyles = createGlobalStyle`
-  -font-face{
-    font-weight: normal;
-    font-style: normal;
-  }
   html {
     --red: #ff0000;
     --black: #393939;
@@ -15,7 +11,7 @@ const GlobalStyles = createGlobalStyle`
     --lightGray: var(--lightGray);
     --offWhite: #ededed;
     --maxWidth: 1000px;
-    --bs: 0 12px 24px 0 rgba(0,0,0,0.9)
+    --bs: 0 12px 24px 0 rgba(0,0,0,0.9);
     box-sizing: border-box;
   }
   *, *:before, *:after{
