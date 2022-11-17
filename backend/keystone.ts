@@ -3,7 +3,7 @@ import { createSchema, config } from "@keystone-next/keystone/schema";
 
 const databaseURL = process.env.DATABASE_URL;
 const sessionConfig = {
-  maxAge: 60 * 60 * 25 * 360,
+  maxAge: 60 * 60 * 24 * 360,
   secret: process.env.COOCKIE_SECRET,
 };
 
