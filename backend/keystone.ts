@@ -1,5 +1,6 @@
 import "dotenv/config";
 import { createSchema, config } from "@keystone-next/keystone/schema";
+import { User } from "./schemas/User";
 
 const databaseURL = process.env.DATABASE_URL;
 const sessionConfig = {
@@ -14,6 +15,7 @@ export default config({
   db: { adapter: "mongoose", url: databaseURL },
   lists: createSchema({
     // Schema item go in here
+    User,
   }),
   ui: {
     // TODO: change,this for role
