@@ -6,6 +6,7 @@ import {
 import { createSchema, config } from "@keystone-next/keystone/schema";
 import { User } from "./schemas/User";
 import { Product } from "./schemas/Product";
+import { ProductImage } from "./schemas/ProductImage";
 import "dotenv/config";
 
 const databaseURL =
@@ -33,6 +34,7 @@ export default withAuth(
     lists: createSchema({
       User,
       Product,
+      ProductImage,
     }),
     ui: {
       isAccessAllowed: ({ session }) => {
