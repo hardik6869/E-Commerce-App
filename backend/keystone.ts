@@ -1,11 +1,12 @@
-import "dotenv/config";
-import { createSchema, config } from "@keystone-next/keystone/schema";
-import { User } from "./schemas/User";
 import { createAuth } from "@keystone-next/auth";
 import {
   withItemData,
   statelessSessions,
 } from "@keystone-next/keystone/session";
+import { createSchema, config } from "@keystone-next/keystone/schema";
+import { User } from "./schemas/User";
+import { Product } from "./schemas/Product";
+import "dotenv/config";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
@@ -31,6 +32,7 @@ export default withAuth(
     db: { adapter: "mongoose", url: databaseURL },
     lists: createSchema({
       User,
+      Product,
     }),
     ui: {
       isAccessAllowed: ({ session }) => {
