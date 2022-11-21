@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "keystone-next",
-    "seed-data": "keystone-next --seed-data"
+    "seed-data": "keystone-next --seed-data",
+    "preinstall": "npx npm-force-resolutions"
   },
   "eslintConfig": {
     "rules": {
