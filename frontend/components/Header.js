@@ -41,7 +41,7 @@ const Header = () => {
         </Logo>
       </div>
       <div className="sub-bar">
-        <p> Search </p>
+        <p> Search... </p>
       </div>
       <Nav />
     </HeaderStyle>
