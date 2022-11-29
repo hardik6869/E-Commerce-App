@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { ALL_PRODUCTS_QUERY } from "./Products";
 import Router from "next/router";
+import DisplayError from "./ErrorMessage";
 
 const CREATE_PRODUCT_MUTATION = gql`
   mutation CREATE_PRODUCT_MUTATION(
@@ -54,6 +55,7 @@ const CreateProduct = () => {
         Router.push({ pathname: `/product/${res.data.createProduct.id}` });
       }}
     >
+      <DisplayError error={error} />
       <fieldset disabled={loading} aria-busy={loading}>
         <label htmlFor="image">
           Image
