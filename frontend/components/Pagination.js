@@ -16,7 +16,7 @@ const PAGINATION_QUERY = gql`
 `;
 
 const Pagination = ({ page }) => {
-  const { data, loading, error } = useQuery(PAGINATION_QUERY);
+  const { loading, error, data } = useQuery(PAGINATION_QUERY);
   if (loading) return "Loading...";
   if (error) return <DisplayError error={error} />;
   const { count } = data._allProductsMeta;
@@ -26,18 +26,17 @@ const Pagination = ({ page }) => {
       <Head>
         <title> Sick Fits {page} of ___ </title>
       </Head>
-      <Link href={`/products/${page - 1}`}>
+      <Link href={`/products/${page - 1}`} legacyBehavior>
         <a aria-disabled={page <= 1}> {"<<"} Prev </a>
       </Link>
       <p>
         {page} Page of {pageCount}
       </p>
       <p> {count} Items Total </p>
-      <Link href={`/products/${page + 1}`}>
-        <a aria-disabled={page <= pageCount}> Next {">>"} </a>
+      <Link href={`/products/${page + 1}`} legacyBehavior>
+        <a aria-disabled={page >= pageCount}> Next {">>"} </a>
       </Link>
     </PaginationStyles>
   );
 };
-
 export default Pagination;
