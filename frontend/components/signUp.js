@@ -27,8 +27,6 @@ const SignUp = () => {
 
   const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
-    // Refetch the currently logged in user
-    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
   const handleSubmit = async (e) => {
