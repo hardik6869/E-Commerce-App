@@ -13,7 +13,7 @@ const SignOut = ({ children }) => {
   });
   return (
     <button type="button" onClick={signout}>
-      {children}
+      Sign Out
     </button>
   );
 };
