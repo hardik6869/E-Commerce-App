@@ -2,54 +2,62 @@ import Form from "./styles/Form";
 import useForm from "../lib/useForm";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
-import { CURRENT_USER_QUERY } from "./User";
 import Error from "./ErrorMessage";
 
-const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
-    authenticateUserWithPassword(email: $email, password: $password) {
-      ... on UserAuthenticationWithPasswordSuccess {
-        item {
-          id
-          email
-          name
-        }
-      }
-      ... on UserAuthenticationWithPasswordFailure {
-        code
-        message
-      }
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION(
+    $email: String!
+    $name: String!
+    $password: String!
+  ) {
+    createUser(data: { email: $email, name: $name, password: $password }) {
+      id
+      name
+      email
     }
   }
 `;
 
-const SignIn = () => {
+const SignUp = () => {
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
+    name: "",
     password: "",
   });
 
-  const [signin, { data, loading }] = useMutation(SIGNIN_MUTATION, {
+  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION, {
     variables: inputs,
     // Refetch the currently logged in user
-    refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    // refetchQueries: [{ query: CURRENT_USER_QUERY }],
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await signin();
+    const res = await signup().catch(console.error);
     resetForm();
   };
-  const error =
-    data?.authenticateUserWithPassword.__typename ===
-    "UserAuthenticationWithPasswordFailure"
-      ? data?.authenticateUserWithPassword
-      : undefined;
+
   return (
     <Form method="POST" onSubmit={handleSubmit}>
-      <h2> Sign Into Your Account </h2>
+      <h2> Sign Up For An Account </h2>
       <Error error={error} />
       <fieldset>
+        {data?.createUser && (
+          <p>
+            Signed Up with {data.createUser.email} - Please Go Head And Sign In!
+          </p>
+        )}
+        <label htmlFor="text">
+          Name
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            autoComplete="name"
+            value={inputs.name}
+            onChange={handleChange}
+          />
+        </label>
         <label htmlFor="email">
           Email
           <input
@@ -78,4 +86,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
