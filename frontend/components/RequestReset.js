@@ -28,6 +28,7 @@ const RequestReset = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup().catch(console.error);
+    console.log(res);
     resetForm();
   };
 
@@ -36,7 +37,7 @@ const RequestReset = () => {
       <h2> Request A Password Reset </h2>
       <Error error={error} />
       <fieldset>
-        {data?.sendUserPasswordResetLink && (
+        {data?.sendUserPasswordResetLink === null && (
           <p>Success! Check Your Email For a link!</p>
         )}
 
@@ -52,7 +53,7 @@ const RequestReset = () => {
           />
         </label>
 
-        <button type="submit"> Sign In! </button>
+        <button type="submit"> Request Reset </button>
       </fieldset>
     </Form>
   );

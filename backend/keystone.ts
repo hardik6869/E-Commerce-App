@@ -53,7 +53,7 @@ export default withAuth(
     }),
     ui: {
       isAccessAllowed: ({ session }) => {
-        return session?.data;
+        return !!session?.data;
       },
     },
     session: withItemData(statelessSessions(sessionConfig), {
