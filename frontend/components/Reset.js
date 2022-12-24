@@ -5,7 +5,7 @@ import { useMutation } from "@apollo/client";
 import Error from "./ErrorMessage";
 
 const RESET_MUTATION = gql`
-  mutation RESET_MUTATION($email: String!, $password: String!, $token: String!) {
+  mutation RESET_MUTATION($email: String!, $token: String!, $password: String!) {
     redeemUserPasswordResetToken(email: $email, token: $token, password: $password) {
       code
       message
@@ -13,11 +13,11 @@ const RESET_MUTATION = gql`
   }
 `;
 
-const Reset = (token) => {
+const Reset = ({token}) => {
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
     password:"",
-    token: token,
+    token,
   });
 
   const [reset, { data, loading, error }] = useMutation(

@@ -10,6 +10,7 @@ import { ProductImage } from "./schemas/ProductImage";
 import "dotenv/config";
 import { insertSeedData } from "./seeds-data";
 import { sendPasswordResetEmail } from "./lib/mail";
+import { CartItem } from "./schemas/CartItem";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
@@ -52,6 +53,7 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
     ui: {
       isAccessAllowed: ({ session }) => {

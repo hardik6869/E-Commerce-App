@@ -27,12 +27,21 @@ const makeANiceEmail = (text: string): string => {
     `;
 };
 
-
-interface MailResponse{
-    message: string,
+export interface MailResponse{
+   accepted?: (string)[] | null;
+   rejected?: (null)[] | null;
+   envelopeTime: number;
+   messageTime: number;
+   messageSize: number;
+   response: string;
+   envelope: Envelope;
+   messageId: string
 }
 
-
+export interface Envelope{
+    from: string
+    to?: (string)[] | null
+}
 
 export async function sendPasswordResetEmail(resetToken: string, to: string): Promise<void> {
     // email the user a token 
@@ -43,11 +52,10 @@ export async function sendPasswordResetEmail(resetToken: string, to: string): Pr
         html: makeANiceEmail(`Your Password Reset Token is here!
          <a href="${process.env.FRONTEND_URL}/reset?token=${resetToken}"> Click Here to reset </a>
         `)
-    }));
+    })) as unknown as MailResponse
 
-  if(process.env.MAIL_USER.includes('ethereal.email')){
-    console.log(` Message Sent! Preview it at ${getTestMessageUrl(info)}`);
-    
+  if(process.env.MAIL_USER.includes('ethereal.email')){ 
+    console.log(` Message Sent! Preview it at ${getTestMessageUrl(info)}`);  
   }
     
 }
