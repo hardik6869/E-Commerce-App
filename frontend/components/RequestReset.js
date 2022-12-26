@@ -28,7 +28,6 @@ const RequestReset = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await signup().catch(console.error);
-    console.log(res);
     resetForm();
   };
 
