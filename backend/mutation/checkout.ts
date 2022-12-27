@@ -16,7 +16,7 @@ async function checkout(
   root: any,
   { token }: Arguments,
   context: KeystoneContext
-): Promise<OrderCreateInput> {
+){
   // 1. Make Sure theiy are signed in
   const userId = context.session.itemId;
   if (!userId) {
@@ -65,7 +65,7 @@ async function checkout(
   // 3. Create the charge with the stripe libarary
   const charge = await stripeConfig.paymentIntents.create({
       amount,
-      currency: "inr",
+      currency: "INR",
       confirm: true,
       payment_method: token,
     })
@@ -76,7 +76,33 @@ async function checkout(
     console.log(charge);
     
   // 4. Convert the CartItems to OrderItems
+  const orderItems = cartItems.map((cartItem => {
+    const orderItem = {
+       name: cartItem.product.name,
+       description: cartItem.product.description,
+       price: cartItem.product.price,
+       quantity: cartItem.quality,
+       photo: { connect: { id: cartItem.product.photo.id}},
+    }
+    return orderItem
+  }))
+
   // 5. Create the order and return it
+  const order =  await context.lists.Order.createOne({
+    data:{
+      total: charge.amount,
+      charge: charge.id,
+      items: {create: orderItems},
+      user: {connect: {id: userId}}
+    }
+  })
+
+  // 6. Clean up any old cart item
+  const cartItemIds =  cartItems.map(cartItem => cartItem.id)
+  await context.lists.CartItem.deleteMany({
+    ids: cartItemIds
+  })
+  return order;
 }
 
 export default checkout;
