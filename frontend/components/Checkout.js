@@ -11,6 +11,9 @@ import styled from "styled-components";
 import SickButton from "./styles/SickButton";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useCart } from "../lib/cartState";
+import { CURRENT_USER_QUERY } from "./User";
 
 const CheckoutFromStyle = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -42,12 +45,16 @@ const CheckoutForm = () => {
   const [loading, setLoading] = useState(false);
   const elements = useElements();
   const stripe = useStripe();
+  const router = useRouter();
+  const closeCart = useCart();
   const [checkout, { error: graphQLError }] = useMutation(
-    CREATE_ORDER_MUTATION
+    CREATE_ORDER_MUTATION,
+    {
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    }
   );
 
   const handleSubmit = async (e) => {
-
     // 1. Stop the form from submitting and turn the loader are
     e.preventDefault();
     setLoading(true);
@@ -56,7 +63,7 @@ const CheckoutForm = () => {
     nProgress.start();
 
     // 3. Create the payment method via stripe(Token come back here if Successfull)
-    const {error, paymentMethod} = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
@@ -78,7 +85,16 @@ const CheckoutForm = () => {
     console.log(order);
 
     // 6. Change the page to view our order
+    router.push({
+      pathname: "order/[id]",
+      query: {
+        id: order.data.checkout.id,
+      },
+    });
+
     // 7. Close the cart
+    closeCart();
+
     // 8. Turn the loader off
     setLoading(false);
     nProgress.done();
