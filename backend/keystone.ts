@@ -11,10 +11,11 @@ import "dotenv/config";
 import { insertSeedData } from "./seeds-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { CartItem } from "./schemas/CartItem";
-import extendGraphqlSchema from './mutation'
+import extendGraphqlSchema from "./mutation";
 import { OrderItem } from "./schemas/OrderItem";
 import { Order } from "./schemas/Order";
 import { Role } from "./schemas/Role";
+import { permissionsList } from "./schemas/fields";
 
 const databaseURL =
   process.env.DATABASE_URL || "mongodb://localhost/keystone-sick-fits-tutorial";
@@ -33,7 +34,7 @@ const { withAuth } = createAuth({
   passwordResetLink: {
     async sendToken(args) {
       // send the mail
-      await sendPasswordResetEmail(args.token, args.identity)
+      await sendPasswordResetEmail(args.token, args.identity);
     },
   },
 });
@@ -60,16 +61,15 @@ export default withAuth(
       CartItem,
       OrderItem,
       Order,
-      Role
+      Role,
     }),
     extendGraphqlSchema,
     ui: {
-      isAccessAllowed: ({ session }) => {
-        return !!session?.data;
-      },
+      isAccessAllowed: ({ session }) => !!session?.data,
     },
     session: withItemData(statelessSessions(sessionConfig), {
-      User: "id",
+      // GraphQL Query
+      User: `id name email role { ${permissionsList.join(" ")} }`,
     }),
   })
 );
