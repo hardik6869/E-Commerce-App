@@ -24,9 +24,9 @@ const OrderStyles = styled.div`
     border-bottom: 1px solid var(--offWhite);
     display: grid;
     grid-template-columns: 300px 1fr;
-    align-items: center;
-    grid-gap: 2rem;
-    margin: 2rem 0;
+    align-items: right !important;
+    grid-gap: 10rem;
+    margin: 2rem 0 2rem 15rem;
     padding-bottom: 2rem;
     img {
       width: 100%;
