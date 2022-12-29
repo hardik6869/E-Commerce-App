@@ -82,7 +82,6 @@ const CheckoutForm = () => {
       },
     });
     console.log("Finished With the Order");
-    console.log(order);
 
     // 6. Change the page to view our order
     router.push({

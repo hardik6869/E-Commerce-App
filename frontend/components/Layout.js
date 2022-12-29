@@ -10,7 +10,7 @@ const GlobalStyles = createGlobalStyle`
     --lightGrey: #e1e1e1;
     --lightGray: var(--lightGray);
     --offWhite: #ededed;
-    --maxWidth: 1000px;
+    --maxWidth: 1500px;
     --bs: 0 12px 24px 0 rgba(0,0,0,0.9);
     box-sizing: border-box;
     font-size : 10px

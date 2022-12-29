@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import gql from "graphql-tag";
 import ErrorMessage from "../../components/ErrorMessage";
 import OrderStyles from "../../components/styles/OrderStyles";

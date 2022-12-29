@@ -14,9 +14,9 @@ const MyApp = ({ Component, pageProps, apollo }) => {
   return (
     <ApolloProvider client={apollo}>
       <CartStateProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </CartStateProvider>
     </ApolloProvider>
   );

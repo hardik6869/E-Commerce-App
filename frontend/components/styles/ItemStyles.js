@@ -3,14 +3,16 @@ import styled from "styled-components";
 const ItemStyles = styled.div`
   background: white;
   border: 1px solid var(--offWhite);
-  box-shadow: var(--bs);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px;
   position: relative;
   display: flex;
   flex-direction: column;
   img {
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+    height: 350px;
+    object-fit: auto;
   }
   p {
     line-height: 2;

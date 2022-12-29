@@ -4,6 +4,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
 import { CURRENT_USER_QUERY } from "./User";
 import Error from "./ErrorMessage";
+import Link from "next/link";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -73,6 +74,11 @@ const SignIn = () => {
           />
         </label>
         <button type="submit"> Sign In! </button>
+        <p>
+          <Link href="resetpassword" legacyBehavior>
+            <a> Forgot password ? </a>
+          </Link>
+        </p>
       </fieldset>
     </Form>
   );

@@ -21,13 +21,15 @@ const Nav = () => {
             My Cart
             <CartCount
               count={user.cart.reduce(
-                (tally, cartItem) => tally + (cartItem.product ? cartItem.quantity : 0),
+                (tally, cartItem) =>
+                  tally + (cartItem.product ? cartItem.quantity : 0),
                 0
               )}
             />
           </button>
         </>
       )}
+
       {!user && (
         <>
           <Link href="signin"> SignIn </Link>

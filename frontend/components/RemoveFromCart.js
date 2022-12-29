@@ -13,11 +13,11 @@ const BigButton = styled.button`
 `;
 
 const REMOVE_FROM_CART_MUTATION = gql`
-    mutation REMOVE_FROM_CART_MUTATION ($id: ID!){
-        deleteCartItem(id: $id){
-            id
-        }
+  mutation REMOVE_FROM_CART_MUTATION($id: ID!) {
+    deleteCartItem(id: $id) {
+      id
     }
+  }
 `;
 
 const update = (cache, payload) => {
@@ -29,7 +29,7 @@ const RemoveFromCart = ({ id }) => {
     variables: { id },
     update,
   });
-  
+
   return (
     <BigButton
       onClick={removeFromCart}

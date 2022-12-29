@@ -2,15 +2,14 @@ import Link from "next/link";
 import styled from "styled-components";
 import Cart from "./Cart";
 import Nav from "./Nav";
-import Search from "./Search";
 
 const Logo = styled.h1`
-  font-size: 4rem;
+  font-size: 3rem;
   margin-left: 2rem;
   position: relative;
   z-index: 2;
-  background: red;
-  transform: skew(-7deg);
+  background: #33ccff;
+  transform: skew(-5deg);
   a {
     color: white;
     text-decoration: none;
@@ -42,9 +41,6 @@ const Header = () => {
           <Link href="/">Sick fits</Link>
         </Logo>
         <Nav />
-      </div>
-      <div className="">
-       <Search />
       </div>
       <Cart />
     </HeaderStyle>

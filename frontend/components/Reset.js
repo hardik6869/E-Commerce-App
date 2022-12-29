@@ -5,29 +5,36 @@ import { useMutation } from "@apollo/client";
 import Error from "./ErrorMessage";
 
 const RESET_MUTATION = gql`
-  mutation RESET_MUTATION($email: String!, $token: String!, $password: String!) {
-    redeemUserPasswordResetToken(email: $email, token: $token, password: $password) {
+  mutation RESET_MUTATION(
+    $email: String!
+    $token: String!
+    $password: String!
+  ) {
+    redeemUserPasswordResetToken(
+      email: $email
+      token: $token
+      password: $password
+    ) {
       code
       message
     }
   }
 `;
 
-const Reset = ({token}) => {
+const Reset = ({ token }) => {
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
-    password:"",
+    password: "",
     token,
   });
 
-  const [reset, { data, loading, error }] = useMutation(
-    RESET_MUTATION,
-    {
-      variables: inputs,
-    }
-  );
+  const [reset, { data, loading, error }] = useMutation(RESET_MUTATION, {
+    variables: inputs,
+  });
 
-  const successfullError = data?.redeemUserPasswordResetToken?.code ? data?.redeemUserPasswordResetToken : undefined
+  const successfullError = data?.redeemUserPasswordResetToken?.code
+    ? data?.redeemUserPasswordResetToken
+    : undefined;
 
   const handleSubmit = async (e) => {
     e.preventDefault();

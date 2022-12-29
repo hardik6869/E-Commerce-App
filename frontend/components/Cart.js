@@ -26,7 +26,6 @@ const CartItemStyles = styled.li`
 const CartItem = ({ cartItem }) => {
   const { product } = cartItem;
   if (!product) return null;
-  console.log(product);
   return (
     <CartItemStyles>
       <img
@@ -50,7 +49,7 @@ const CartItem = ({ cartItem }) => {
 
 const Cart = () => {
   const me = useUser();
-  const {cartOpen, closeCart} = useCart()
+  const { cartOpen, closeCart } = useCart();
   if (!me) return null;
 
   return (
@@ -59,7 +58,7 @@ const Cart = () => {
         <Supreme>{me.name}'s Cart</Supreme>
         <CloseButton onClick={closeCart}> &times; </CloseButton>
       </header>
-     
+
       <ul>
         {me.cart.map((cartItem) => (
           <CartItem key={cartItem.id} cartItem={cartItem} />

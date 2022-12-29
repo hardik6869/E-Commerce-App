@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import styled from "styled-components";
 import Product from "./Product";
 import { perPage } from "../config";
+import Search from "./Search";
 
 export const ALL_PRODUCTS_QUERY = gql`
   query ALL_PRODUCTS_QUERY($skip: Int = 0, $first: Int) {
@@ -23,8 +24,8 @@ export const ALL_PRODUCTS_QUERY = gql`
 
 const ProductListStyles = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 60px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 40px;
 `;
 
 const Products = ({ page }) => {
@@ -38,6 +39,7 @@ const Products = ({ page }) => {
   if (error) return <p> {error.message} </p>;
   return (
     <div>
+      <Search />
       <ProductListStyles>
         {data.allProducts.map((product) => (
           <Product key={product.id} product={product} />

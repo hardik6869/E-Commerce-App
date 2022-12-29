@@ -3,8 +3,7 @@ import { useCombobox, resetIdCounter } from "downshift";
 import gql from "graphql-tag";
 import { useLazyQuery } from "@apollo/client";
 import debounce from "lodash.debounce";
-import { useRouter } from 'next/router'
-
+import { useRouter } from "next/router";
 
 const SEARCH_PRODUCTS_QUERY = gql`
   query SEARCH_PRODUCTS_QUERY($searchTerm: String!) {
@@ -28,7 +27,7 @@ const SEARCH_PRODUCTS_QUERY = gql`
 `;
 
 const Search = () => {
-    const router = useRouter()
+  const router = useRouter();
   const [findItems, { loading, data, error }] = useLazyQuery(
     SEARCH_PRODUCTS_QUERY,
     {
@@ -56,11 +55,11 @@ const Search = () => {
         },
       });
     },
-    onSelectedItemChange({selectedItem}) {
+    onSelectedItemChange({ selectedItem }) {
       console.log("Selected Item Changed!");
-      router.push({pathname:`/product/${selectedItem.id}`})
+      router.push({ pathname: `/product/${selectedItem.id}` });
     },
-    itemToString: (item) => item?.name || null
+    itemToString: (item) => item?.name || null,
   });
   return (
     <SearchStyles>
@@ -86,9 +85,12 @@ const Search = () => {
               {item.name}
             </DropDownItem>
           ))}
-          {isOpen && !items.length && !loading && (
-            <DropDownItem> No, DropDown items found for {inputValue } </DropDownItem>
-          )}
+        {isOpen && !items.length && !loading && (
+          <DropDownItem>
+            {" "}
+            No, DropDown items found for {inputValue}{" "}
+          </DropDownItem>
+        )}
       </DropDown>
     </SearchStyles>
   );

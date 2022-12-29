@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import SignIn from "../components/SignIn";
-import SignUp from "../components/signUp";
+import RequestReset from "../components/RequestReset";
 
 const GridStyles = styled.div`
   display: grid;
@@ -8,12 +7,12 @@ const GridStyles = styled.div`
   grid-gap: 4rem;
 `;
 
-const SignInPage = () => {
+const ResetPasswordPage = () => {
   return (
     <GridStyles>
-      <SignIn /> <SignUp />
+      <RequestReset />
     </GridStyles>
   );
 };
 
-export default SignInPage;
+export default ResetPasswordPage;

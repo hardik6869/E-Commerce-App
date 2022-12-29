@@ -39,7 +39,6 @@ const OrderUl = styled.ul`
 `;
 
 const CountItemsInAnOrder = (order) => {
-    console.log(order);
   return order.items.reduce((tally, item) => tally + item.quantity, 0);
 };
 
@@ -60,7 +59,7 @@ const OrdersPage = ({ query }) => {
       <OrderUl>
         {allOrders.map((order) => (
           <OrderItemStyles>
-            <Link href={`order/${order.id}`}>   
+            <Link href={`order/${order.id}`}>
               <div className="order-meta">
                 <p> {CountItemsInAnOrder(order)} Items</p>
                 <p>

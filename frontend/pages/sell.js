@@ -1,9 +1,12 @@
 import CreateProduct from "../components/CreateProduct";
+import PleaseSignIn from "../components/PleaseSignIn";
 
 const SellPage = () => {
   return (
     <div>
-      <p>Sell Page </p> <CreateProduct />
+      <PleaseSignIn>
+        <CreateProduct />
+      </PleaseSignIn>
     </div>
   );
 };
