@@ -11,11 +11,13 @@ export const User = list({
     // You can't delete yourself
     delete: permissions.canManageUsers,
   },
+  
   ui:{
     // Hide the backend UI from reguler users
     hideCreate: args => !permissions.canManageUsers(args),
     hideDelete: args => !permissions.canManageUsers(args),
   },
+  
   fields: {
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
@@ -28,6 +30,7 @@ export const User = list({
         itemView: {fieldMode: 'read'}
       }
     }),
+    
    orders: relationship({ref: 'Order.user', many:true}),
    role: relationship({
     ref: 'Role.assignedTo',
@@ -36,6 +39,7 @@ export const User = list({
       update: permissions.canManageUsers,
     }
    }),
+
    products: relationship({
     ref: 'Product.user',
     many:true

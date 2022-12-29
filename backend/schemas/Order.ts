@@ -1,14 +1,8 @@
-import {
-  text,
-  select,
-  integer,
-  relationship,
-  virtual,
-} from "@keystone-next/fields";
+import { text, integer, relationship, virtual } from "@keystone-next/fields";
 import { list } from "@keystone-next/keystone/schema";
 import { isSignedIn, rules } from "../access";
 import formatMoney from "../lib/formatMoney";
-import { OrderItem } from "./OrderItem";
+
 export const Order = list({
   access: {
     create: isSignedIn,
@@ -16,6 +10,13 @@ export const Order = list({
     update: () => false,
     delete: () => false,
   },
+
+  ui: {
+    listView: {
+      initialColumns: ["user", "charge", "items", "total", "label"],
+    },
+  },
+
   fields: {
     label: virtual({
       graphQLReturnType: "String",

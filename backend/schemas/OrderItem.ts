@@ -8,6 +8,13 @@ export const OrderItem = list({
     update: () => false,
     delete: () => false,
   },
+
+  ui: {
+    listView: {
+      initialColumns: ["name", "quantity", "price", , "order", "description"],
+    },
+  },
+
   fields: {
     name: text({ isRequired: true }),
     description: text({
@@ -25,9 +32,9 @@ export const OrderItem = list({
         inlineEdit: { fields: ["image", "altText"] },
       },
     }),
+
     price: integer(),
     quantity: integer(),
-    order: relationship({ref: 'Order.items'}),
-    
+    order: relationship({ ref: "Order.items" }),
   },
 });

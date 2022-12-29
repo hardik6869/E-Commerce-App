@@ -8,17 +8,20 @@ export const CartItem = list({
     update: rules.canOrder,
     delete: rules.canOrder,
   },
+
   ui: {
     listView: {
       initialColumns: ["product", "quantity", "user"],
     },
   },
+
   fields: {
     // TODO: Custom Label in here
     quantity: integer({
       defaultValue: 1,
       isRequired: true,
     }),
+
     product: relationship({ ref: "Product" }),
     user: relationship({ ref: "User.cart" }),
   },

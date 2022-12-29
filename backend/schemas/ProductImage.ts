@@ -12,7 +12,7 @@ export const cloudinary = {
 };
 
 export const ProductImage = list({
-  access:{
+  access: {
     create: isSignedIn,
     read: () => true,
     update: permissions.canManageProducts,
@@ -26,5 +26,6 @@ export const ProductImage = list({
     altText: text(),
     product: relationship({ ref: "Product.photo" }),
   },
+
   ui: { listView: { initialColumns: ["image", "altText", "product"] } },
 });

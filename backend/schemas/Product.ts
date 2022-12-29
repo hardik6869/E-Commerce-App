@@ -3,12 +3,19 @@ import { list } from "@keystone-next/keystone/schema";
 import { isSignedIn, rules } from "../access";
 
 export const Product = list({
-  access:{
+  access: {
     create: isSignedIn,
     read: rules.canReadProducts,
     update: rules.canManageProducts,
     delete: rules.canManageProducts,
   },
+
+  ui: {
+    listView: {
+      initialColumns: ["name", "description", "photo", "status", "price"],
+    },
+  },
+
   fields: {
     name: text({ isRequired: true }),
     description: text({
@@ -16,7 +23,6 @@ export const Product = list({
         displayMode: "textarea",
       },
     }),
-
     photo: relationship({
       ref: "ProductImage.product",
       ui: {
@@ -38,12 +44,13 @@ export const Product = list({
         createView: { fieldMode: "hidden" },
       },
     }),
+
     price: integer(),
     user: relationship({
-      ref:'User.products',
-      defaultValue: ({context}) => ({
-        connect: {id: context.session.itemId}
-      })
-    })
+      ref: "User.products",
+      defaultValue: ({ context }) => ({
+        connect: { id: context.session.itemId },
+      }),
+    }),
   },
 });
