@@ -56,7 +56,6 @@ const Search = () => {
       });
     },
     onSelectedItemChange({ selectedItem }) {
-      console.log("Selected Item Changed!");
       router.push({ pathname: `/product/${selectedItem.id}` });
     },
     itemToString: (item) => item?.name || null,
@@ -77,19 +76,20 @@ const Search = () => {
         {isOpen &&
           items.map((item, index) => (
             <DropDownItem
+              {...getItemProps({ item, index })}
               key={item.id}
-              {...getItemProps({ item })}
               highlighted={index === highlightedIndex}
             >
-              <img src={item.photo.image.publicUrlTransformed} width={50} />
+              <img
+                src={item.photo.image.publicUrlTransformed}
+                alt={item.name}
+                width="50"
+              />
               {item.name}
             </DropDownItem>
           ))}
         {isOpen && !items.length && !loading && (
-          <DropDownItem>
-            {" "}
-            No, DropDown items found for {inputValue}{" "}
-          </DropDownItem>
+          <DropDownItem>Sorry, No items found for {inputValue}</DropDownItem>
         )}
       </DropDown>
     </SearchStyles>

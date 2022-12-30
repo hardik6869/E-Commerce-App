@@ -2,9 +2,10 @@ import Form from "./styles/Form";
 import useForm from "../lib/useForm";
 import gql from "graphql-tag";
 import { useMutation } from "@apollo/client";
-import { CURRENT_USER_QUERY } from "./User";
+import { CURRENT_USER_QUERY, useUser } from "./User";
 import Error from "./ErrorMessage";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -25,6 +26,7 @@ const SIGNIN_MUTATION = gql`
 `;
 
 const SignIn = () => {
+  const router = useRouter();
   const { inputs, handleChange, resetForm } = useForm({
     email: "",
     password: "",
@@ -40,6 +42,7 @@ const SignIn = () => {
     e.preventDefault();
     const res = await signin();
     resetForm();
+    // router.push({ pathname: `/` });
   };
   const error =
     data?.authenticateUserWithPassword.__typename ===

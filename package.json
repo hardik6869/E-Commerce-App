@@ -1,0 +1,21 @@
+{
+    "name": "e-commerce-app",
+    "version": "0.1.0",
+    "private": true,
+    "main": "keystone.js",
+    "scripts": {
+        "start": "npm run dev & ",
+        "server": "node backend/keystone",
+        "client": "next start -p 5000 --prefix frontend/index",
+        "test": "NODE-ENV=test jest --watch",
+        "dev": "concurrently \"react-scripts start\" \"npm run server\" \"npm run client\"",
+        "heroku-postbuild": "next build",
+        "preinstall": "npx npm-force-resolutions",
+        "lint": "next lint"
+    },
+    "author": "Hardik Prajapati",
+    "license": "ISC",
+    "dependencies": {
+        "concurrently": "^7.6.0"
+    }
+}

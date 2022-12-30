@@ -25,7 +25,6 @@ async function addToCart(
 
   const [existingCartItem] = allCartItems;
   if (existingCartItem) {
-    console.log(existingCartItem);
     console.log(
       `There are already ${existingCartItem.quantity}, increment by 1!`
     );

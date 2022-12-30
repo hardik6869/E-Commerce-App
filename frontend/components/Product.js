@@ -5,8 +5,11 @@ import DeleteProduct from "./DeleteProduct";
 import ItemStyles from "./styles/ItemStyles";
 import PriceTag from "./styles/PriceTag";
 import Title from "./styles/Title";
+import { useUser } from "./User";
 
 const Product = ({ product }) => {
+  const me = useUser();
+  console.log(me);
   return (
     <ItemStyles>
       <img
@@ -20,14 +23,15 @@ const Product = ({ product }) => {
       <PriceTag> {formatMoney(product.price)} </PriceTag>
 
       <p> {product.description} </p>
-
-      <div className="buttonList">
-        <Link href={{ pathname: "update", query: { id: product.id } }}>
-          Edit
-        </Link>
-        <AddToCart id={product.id} />
-        <DeleteProduct id={product.id}> Delete </DeleteProduct>
-      </div>
+      {me && (
+        <div className="buttonList">
+          <Link href={{ pathname: "update", query: { id: product.id } }}>
+            Edit
+          </Link>
+          <AddToCart id={product.id} />
+          <DeleteProduct id={product.id}> Delete </DeleteProduct>
+        </div>
+      )}
     </ItemStyles>
   );
 };
